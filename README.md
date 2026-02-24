@@ -18,13 +18,40 @@ This project implements the architecture and design described in `Audio-Dedup-Pl
 - `docs/` – Architecture and API documentation
 
 ## Getting Started (Dev)
-
-1. Copy env file:
+### Run each section in separate terminal of the root location : 
+1. Copy env file: (Replace your credentials in the .env file)
    ```bash
-   cd audio-dedup-platform
    cp .env.example .env
    ```
-2. Start the stack (once Docker files are implemented):
+2. Start redis from the docker compose : Comment out everything other than redis in compose file
+3. Run the docker-compose :
+    ```
+   docker-compose up -d
+   ```
+   
+4. Run backend (Do npm i --force if dependencies are not installed):
+   ```
+   cd backend
+   npm i
+   npm start:dev
+   ```
+5. Run frontend (Do npm i --force if dependencies are not installed):
+   ```
+   cd frontend
+   npm i
+   npm start 
+   ```
+7. Run python service :
+   ```
+   conda create --name <env_name> python=3.11
+   conda activate <env_name>
+   cd audio-service
+   pip install -r requirements.txt
+   cd app
+   python main.py
+   ```   
+## Alternate way
+1. Start the stack (once Docker files are implemented):
    ```bash
    docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
    ```

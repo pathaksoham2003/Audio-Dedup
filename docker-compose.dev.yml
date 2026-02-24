@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/usr/src/app
+    command: npm run start:dev
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/usr/src/app
+    command: npm run dev
+
+  audio-service:
+    build:
+      context: ./audio-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./audio-service:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
